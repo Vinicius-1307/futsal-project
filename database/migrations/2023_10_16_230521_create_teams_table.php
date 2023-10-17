@@ -15,9 +15,7 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('shirt_id');
-            $table->foreign('shirt_id')->references('id')->on('shirts');
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

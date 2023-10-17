@@ -11,6 +11,5 @@ class Team extends Model
 
     protected $fillable = [
         'name',
-        'shirt_id'
     ];
 }

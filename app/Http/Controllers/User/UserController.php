@@ -23,7 +23,7 @@ class UserController extends Controller
                 'email' => $data['email'],
                 'password' => bcrypt($data['password'])
             ]);
-            return ReturnApi::Success('Usuário criado com sucesso.', 201);
+            return ReturnApi::Success('Usuário criado com sucesso.', $data);
         } catch (\Throwable $th) {
             return ReturnApi::Error('Erro ao criar usuário.', $th->getMessage(), 400);
         }
