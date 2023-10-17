@@ -15,7 +15,8 @@ class CreateShirtsTable extends Migration
     {
         Schema::create('shirts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('team_name');
+            $table->string('number');
             $table->timestamps();
         });
     }
