@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teams;
 
 use App\Builder\ReturnApi;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Team\EditTeamRequest;
 use App\Models\Team;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,5 +27,35 @@ class TeamController extends Controller
         } catch (Exception $err) {
             return response()->json(['error' => true, 'message' => $err->getMessage()]);
         }
+    }
+
+    public function edit(EditTeamRequest $request, $id)
+    {
+        $data = $request->all();
+
+        try {
+            $team = Team::find($id);
+            if (!isset($team)) return ReturnApi::Error("Time não encontrado", 404);
+
+            $verifyName = Team::where('name', $data['name'])->first();
+            if ($verifyName) return ReturnApi::Error('Esse nome de time já existe!', 400);
+
+            $oldTeam = $team;
+
+            foreach ($team->toArray() as $key => $value) $team[$key] = array_key_exists($key, $team->toArray()) ? $value : $data[$key];
+
+            $team->update($data);
+
+            return ReturnApi::Success("Nome do time atualizado com sucesso!", 200);
+        } catch (\Exception $error) {
+            $oldTeam->update();
+            return ReturnApi::Error('Erro ao atualizar o time.', $error->getMessage(), 500);
+        }
+    }
+
+    public function list()
+    {
+        $teams = Team::with('players')->get();
+        return (['error' => false, 'teams' => $teams]);
     }
 }

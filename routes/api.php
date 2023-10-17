@@ -31,6 +31,8 @@ Route::middleware('authJwt')->group(function () {
     });
 
     Route::prefix('team')->group(function () {
+        Route::patch('/{id}', [TeamController::class, 'edit']);
         Route::post('/', [TeamController::class, 'create']);
+        Route::get('/', [TeamController::class, 'list']);
     });
 });
