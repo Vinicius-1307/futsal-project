@@ -28,9 +28,10 @@ class CreatePlayerRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $verifyTeamAlreadyExist = Team::where('team_id', $value);
+        $verifyTeamAlreadyExist = Team::where('team_id', $value)
+            ->where('team_id', request()->input('team_id'));
 
-        return !$verifyTeamAlreadyExist;
+        return $verifyTeamAlreadyExist;
     }
 
     /**

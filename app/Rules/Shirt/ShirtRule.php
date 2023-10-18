@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\Shirt;
 
 use App\Models\Player;
 use Illuminate\Contracts\Validation\Rule;

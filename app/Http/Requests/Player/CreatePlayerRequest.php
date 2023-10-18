@@ -4,7 +4,7 @@ namespace App\Http\Requests\Player;
 
 use App\Exceptions\ApiException;
 use App\Rules\Player\CreatePlayerRule;
-use App\Rules\ShirtRule;
+use App\Rules\Shirt\ShirtRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
