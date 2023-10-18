@@ -55,7 +55,6 @@ class TeamController extends Controller
 
     public function list()
     {
-        $teams = Team::with('players')->get();
-        return (['error' => false, 'teams' => $teams]);
+        return (['error' => false, 'teams' => Team::with('players')->get()]);
     }
 }

@@ -3,11 +3,12 @@
 namespace App\Http\Requests\Player;
 
 use App\Exceptions\ApiException;
+use App\Rules\Player\CreatePlayerRule;
 use App\Rules\ShirtRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePlayerRequest extends FormRequest
+class CreatePlayerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,15 +30,16 @@ class UpdatePlayerRequest extends FormRequest
         return [
             'name' => 'string|required',
             'shirt_number' => ['integer', new ShirtRule(request()->input('team_id'))],
-            'team_id' => 'integer'
-
+            'team_id' => ['integer', new CreatePlayerRule(request()->input('team_id'))]
         ];
     }
+
     public function attributes(): array
     {
         return [
             'name' => 'Nome',
             'shirt_number' => 'Número da camisa',
+            'team_id' => 'ID do time'
         ];
     }
 
