@@ -24,6 +24,7 @@ Route::middleware('authJwt')->group(function () {
 
     Route::prefix('player')->group(function () {
         Route::post('/', [PlayerController::class, 'create']);
+        Route::put('/{id}', [PlayerController::class, 'update']);
     });
 
     Route::prefix('user')->group(function () {
