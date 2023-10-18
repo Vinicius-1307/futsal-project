@@ -7,14 +7,15 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ShirtRule implements Rule
 {
+    private $team_id;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($team_id)
     {
-        //
+        $this->team_id = $team_id;
     }
 
     /**
@@ -26,12 +27,9 @@ class ShirtRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        // dd($value);
         $numberInUse = Player::where('shirt_number', $value)
             ->where('team_id', request()->input('team_id'))
             ->first();
-
-        // dd($numberInUse);
 
         return !$numberInUse;
     }

@@ -28,7 +28,8 @@ class UpdatePlayerRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            'shirt_number' => ['integer', new ShirtRule]
+            'shirt_number' => ['integer', new ShirtRule(request()->input('team_id'))],
+            'team_id' => 'integer'
 
         ];
     }
@@ -44,6 +45,7 @@ class UpdatePlayerRequest extends FormRequest
     {
         return [
             'name.string' => 'Nome deve ser uma string.',
+            'name.required' => 'O campo nome é obrigatório.',
             'shirt_number.integer' => 'O número da camisa deve ser um inteiro.',
         ];
     }
