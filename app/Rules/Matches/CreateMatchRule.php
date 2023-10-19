@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Rules\Player;
+namespace App\Rules\Matches;
 
-use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Contracts\Validation\Rule;
 
-class CreatePlayerRule implements Rule
+class CreateMatchRule implements Rule
 {
-    private $team_id;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($team_id)
+    public function __construct()
     {
-        $this->team_id = $team_id;
+        //
     }
 
     /**
@@ -28,9 +26,7 @@ class CreatePlayerRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        $verifyTeamAlreadyExist = Team::where('team_id', $value, request()->input('team_id'));
-
-        return $verifyTeamAlreadyExist;
+        return Team::find($value)->players->count() >= 5;
     }
 
     /**
@@ -40,6 +36,6 @@ class CreatePlayerRule implements Rule
      */
     public function message()
     {
-        return 'Esse time não existe.';
+        return 'Cada time deve ter no mínimo 5 jogadores para participar de uma partida.';
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Matches\MatchController;
 use App\Http\Controllers\Player\PlayerController;
 use App\Http\Controllers\Teams\TeamController;
 use App\Http\Controllers\User\UserController;
@@ -35,5 +36,9 @@ Route::middleware('authJwt')->group(function () {
         Route::patch('/{id}', [TeamController::class, 'edit']);
         Route::post('/', [TeamController::class, 'create']);
         Route::get('/', [TeamController::class, 'list']);
+    });
+
+    Route::prefix('match')->group(function () {
+        Route::post('/', [MatchController::class, 'create']);
     });
 });
