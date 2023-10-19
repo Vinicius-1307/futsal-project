@@ -17,12 +17,12 @@ class Matches extends Model
         'result'
     ];
 
-    public function timeA()
+    public function teamA()
     {
         return $this->belongsTo(Team::class, 'teamA_id');
     }
 
-    public function timeB()
+    public function teamB()
     {
         return $this->belongsTo(Team::class, 'teamB_id');
     }

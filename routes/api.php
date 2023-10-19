@@ -40,5 +40,6 @@ Route::middleware('authJwt')->group(function () {
 
     Route::prefix('match')->group(function () {
         Route::post('/', [MatchController::class, 'create']);
+        Route::put('/{id}', [MatchController::class, 'update']);
     });
 });
