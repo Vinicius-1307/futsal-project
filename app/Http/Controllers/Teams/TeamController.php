@@ -60,6 +60,6 @@ class TeamController extends Controller
 
     public function listOrderBy()
     {
-        return response()->json(['error' => false, 'message' => 'Tabela dos times:', 'data' => Team::with('matches')->orderBy('points', 'desc')->get()], 200);
+        return response()->json(['error' => false, 'message' => 'Tabela dos times:', 'data' => Team::orderBy('points', 'desc')->get()], 200);
     }
 }

@@ -31,6 +31,9 @@ class MatchObserver
         $matches->teamA->points = 0;
         $matches->teamB->points = 0;
 
+        $matches->teamA->goals += $goalsTeamA;
+        $matches->teamB->goals += $goalsTeamB;
+
         if ($goalsTeamA > $goalsTeamB) {
             $matches->result = 'TeamA';
             $matches->teamA->points += 3;
