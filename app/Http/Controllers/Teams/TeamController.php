@@ -55,6 +55,11 @@ class TeamController extends Controller
 
     public function list()
     {
-        return (['error' => false, 'teams' => Team::with('players')->get()]);
+        return response()->json(['error' => false, 'message' => 'Times com seus jogadores', 'data' => Team::with('players')->get()], 200);
+    }
+
+    public function listOrderBy()
+    {
+        return response()->json(['error' => false, 'message' => 'Tabela dos times:', 'data' => Team::with('matches')->orderBy('points', 'desc')->get()], 200);
     }
 }
