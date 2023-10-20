@@ -14,6 +14,8 @@ class Matches extends Model
         'end_time',
         'teamA_id',
         'teamB_id',
+        'goalsTeamA',
+        'goalsTeamB',
         'result'
     ];
 

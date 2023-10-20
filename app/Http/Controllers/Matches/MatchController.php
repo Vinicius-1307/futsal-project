@@ -16,18 +16,12 @@ class MatchController extends Controller
 
     public function update(UpdateMatchRequest $request, $id)
     {
-        $data = $request->all();
-
-        $match = Matches::find($id);
-
-        $match->update([
-            'goalsTeamA' => $data['goalsTeamA'],
-            'goalsTeamB' => $data['goalsTeamB']
-        ]);
-
-        // $goalsTeamA = $request->goalsTeamA;
-        // $goalsTeamB = $request->goalsTeamB;
-
-        return response()->json(['error' => false, 'message' => 'Partida atualizada com sucesso!', 'data' => $match], 200);
+        return response()->json(['error' => false, 'message' => 'Partida atualizada com sucesso!', 'data' => Matches::find($id)->update($request->validated())], 200);
     }
+
+    // public function updateMatchData(UpdateMatchRequest $matches)
+    // {
+    //     $goalsTeamA = $matches->goalsTeamA;
+    //     $goalsTeamB = $matches->goalsTeamB;
+    // }
 }

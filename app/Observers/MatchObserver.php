@@ -25,9 +25,11 @@ class MatchObserver
      */
     public function updated(Matches $matches)
     {
-        dd($matches);
         $goalsTeamA = $matches->goalsTeamA;
         $goalsTeamB = $matches->goalsTeamB;
+
+        $matches->teamA->points = 0;
+        $matches->teamB->points = 0;
 
         if ($goalsTeamA > $goalsTeamB) {
             $matches->result = 'TeamA';
