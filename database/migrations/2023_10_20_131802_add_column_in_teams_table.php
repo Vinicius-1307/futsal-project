@@ -14,7 +14,7 @@ class AddColumnInTeamsTable extends Migration
     public function up()
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->unsignedBigInteger('goals');
+            $table->unsignedBigInteger('goals')->default(0);
         });
     }
 
