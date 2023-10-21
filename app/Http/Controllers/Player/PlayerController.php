@@ -47,4 +47,9 @@ class PlayerController extends Controller
             return ReturnApi::Error('Erro ao atualizar o jogador.', $error->getMessage(), 500);
         }
     }
+
+    public function destroy($id)
+    {
+        return response()->json(['error' => false, 'message' => 'Jogador deletado com sucesso!', 'data' => Player::find($id)->delete()], 200);
+    }
 }

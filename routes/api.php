@@ -23,13 +23,14 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::middleware('authJwt')->group(function () {
 
+    Route::prefix('user')->group(function () {
+        Route::post('/', [UserController::class, 'create']);
+    });
+
     Route::prefix('player')->group(function () {
         Route::post('/', [PlayerController::class, 'create']);
         Route::put('/{id}', [PlayerController::class, 'update']);
-    });
-
-    Route::prefix('user')->group(function () {
-        Route::post('/', [UserController::class, 'create']);
+        Route::delete('/{id}', [PlayerController::class, 'destroy']);
     });
 
     Route::prefix('team')->group(function () {
@@ -37,10 +38,12 @@ Route::middleware('authJwt')->group(function () {
         Route::post('/', [TeamController::class, 'create']);
         Route::get('/', [TeamController::class, 'list']);
         Route::get('/order-by', [TeamController::class, 'listOrderBy']);
+        Route::delete('/{id}', [TeamController::class, 'destroy']);
     });
 
     Route::prefix('match')->group(function () {
         Route::post('/', [MatchController::class, 'create']);
         Route::put('/{id}', [MatchController::class, 'update']);
+        Route::delete('/{id}', [MatchController::class, 'destroy']);
     });
 });

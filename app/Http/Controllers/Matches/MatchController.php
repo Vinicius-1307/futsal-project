@@ -19,4 +19,9 @@ class MatchController extends Controller
     {
         return response()->json(['error' => false, 'message' => 'Partida atualizada com sucesso!', 'data' => Matches::find($id)->update($request->validated())], 200);
     }
+
+    public function destroy($id)
+    {
+        return response()->json(['error' => false, 'message' => 'Partida deletada com sucesso!', 'data' => Matches::find($id)->delete()], 200);
+    }
 }

@@ -62,4 +62,9 @@ class TeamController extends Controller
     {
         return response()->json(['error' => false, 'message' => 'Tabela dos times:', 'data' => Team::orderBy('points', 'desc')->get()], 200);
     }
+
+    public function destroy($id)
+    {
+        return response()->json(['error' => false, 'message' => 'Time deletado com sucesso!', 'data' => Team::find($id)->delete()], 200);
+    }
 }
