@@ -39,15 +39,24 @@ Copie o arquivo ‘.env.example’ para ‘.env’ e configure as seguintes vari
 Endpoints
 
 A API Laravel possui os seguintes endpoints: 
+
+Login:
+
 •	POST /api /login: Realiza login com autenticação JWT.
 
+Users:
+
 •	POST /api/user/: Registra um novo usuário.
+
+Players:
 
 •	POST /api/player: Cria um novo jogador.
 
 •	PUT /api/player/{id}: Edita um jogador existente.
 
 •	DELETE /api/player/{id}: Deleta um jogador.
+
+Teams:
 
 •	POST /api/team: Cria um novo time.
 
@@ -58,6 +67,8 @@ A API Laravel possui os seguintes endpoints:
 •	PATCH /api/team/{id}: Edita um time existente.
 
 •	DELETE /api/team/{id}: Deleta um time.
+
+Matches:
 
 •	POST /api/match: Cria uma nova partida.
 
