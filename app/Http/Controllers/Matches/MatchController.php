@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Match\CreateMatchRequest;
 use App\Http\Requests\Match\UpdateMatchRequest;
 use App\Models\Matches;
-use App\Models\Team;
 
 class MatchController extends Controller
 {
