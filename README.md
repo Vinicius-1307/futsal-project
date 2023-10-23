@@ -2,7 +2,7 @@ API de Gerenciamento de Jogos de Futsal - Laravel
 
 Bem-vindo à API de Gerenciamento de Jogos de Futsal construída com Laravel. Esta API permite o gerenciamento de jogadores, times, partidas e autenticação de usuários com JWT. É uma ferramenta poderosa para administrar informações relacionadas a jogos de futsal de forma eficaz e eficiente.
 
-Configuração:
+**Configuração:**
 
 Antes de começar a usar a API Laravel, siga as etapas a seguir para configurar o ambiente:
 
@@ -36,27 +36,27 @@ Copie o arquivo ‘.env.example’ para ‘.env’ e configure as seguintes vari
 
     ‘php artisan serve’
 
-Endpoints
+**Endpoints:**
 
 A API Laravel possui os seguintes endpoints: 
 
-Login:
+**Login:**
 
 •	POST /api /login: Realiza login com autenticação JWT.
 
-Users:
+**Users:**
 
 •	POST /api/user/: Registra um novo usuário.
 
-Players:
+**Players:**
 
-•	POST /api/player: Cria um novo jogador.
+•	POST ```/api/player:``` Cria um novo jogador.
 
 •	PUT /api/player/{id}: Edita um jogador existente.
 
 •	DELETE /api/player/{id}: Deleta um jogador.
 
-Teams:
+**Teams:**
 
 •	POST /api/team: Cria um novo time.
 
@@ -68,7 +68,7 @@ Teams:
 
 •	DELETE /api/team/{id}: Deleta um time.
 
-Matches:
+**Matches:**
 
 •	POST /api/match: Cria uma nova partida.
 
@@ -76,8 +76,8 @@ Matches:
 
 •	DELETE /api/match/{id}: Deleta uma partida existente.
 
-Contato
-Se você tiver alguma dúvida ou precisar de assistência, entre em contato com ‘viniciusjose9@outlook.com’.
+**Contato:**
+Se você tiver alguma dúvida ou precisar de assistência, entre em contato com [viniciusjose9@outlook.com].
 
 Aproveite a API de Gerenciamento de Jogos de Futsal construída com Laravel!	
 
