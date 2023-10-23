@@ -25,7 +25,7 @@ Copie o arquivo ```.env.example``` para ```.env``` e configure as seguintes vari
 
 5.	Gerar uma Chave de Aplicativo:
    
-    Execute o comando ‘php artisan key:generate’ para gerar uma chave de aplicativo.
+    Execute o comando ```php artisan key:generate``` para gerar uma chave de aplicativo.
 
 6.	Executar Migrações:
 
