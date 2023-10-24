@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teams;
 
+use App\Builder\ReturnApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Team\CreateTeamRequest;
 use App\Http\Requests\Team\EditTeamRequest;
@@ -11,11 +12,24 @@ class TeamController extends Controller
 {
     public function create(CreateTeamRequest $request)
     {
+        $data = $request->all();
+
+        $verifyName = Team::where('name', $data['name'])->first();
+        if ($verifyName) return ReturnApi::Error('Esse nome de time já existe!', 400);
+
         return response()->json(['error' => false, 'message' => 'Time criado com sucesso!', 'data' => Team::create($request->validated())], 200);
     }
 
     public function edit(EditTeamRequest $request, $id)
     {
+        $data = $request->all();
+
+        $team = Team::find($id);
+        if (!isset($team)) return ReturnApi::Error("Time não encontrado.", 404);
+
+        $verifyName = Team::where('name', $data['name'])->first();
+        if ($verifyName) return ReturnApi::Error('Esse nome de time já existe!', 400);
+
         return response()->json(['error' => false, 'message' => 'Time atualizado com sucesso!', 'data' => Team::find($id)->update($request->validated())], 200);
     }
 
@@ -31,6 +45,9 @@ class TeamController extends Controller
 
     public function destroy($id)
     {
+        $team = Team::find($id);
+        if (!isset($team)) return ReturnApi::Error("Time não encontrado.", 404);
+
         return response()->json(['error' => false, 'message' => 'Time deletado com sucesso!', 'data' => Team::find($id)->delete()], 200);
     }
 }

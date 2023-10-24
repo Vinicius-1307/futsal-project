@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Team;
 
 use App\Exceptions\ApiException;
+use App\Rules\Team\UpdateTeamRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 

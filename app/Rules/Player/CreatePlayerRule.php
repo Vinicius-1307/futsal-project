@@ -30,6 +30,10 @@ class CreatePlayerRule implements Rule
     {
         $verifyTeamAlreadyExist = Team::where('team_id', $value, request()->input('team_id'));
 
+        if (empty($verifyTeamAlreadyExist)) {
+            return !$verifyTeamAlreadyExist;
+        }
+
         return $verifyTeamAlreadyExist;
     }
 
