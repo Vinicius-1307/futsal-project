@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teams;
 use App\Builder\ReturnApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Team\CreateTeamRequest;
+use App\Http\Requests\Team\DeleteTeamRequest;
 use App\Http\Requests\Team\EditTeamRequest;
 use App\Models\Team;
 
@@ -12,25 +13,12 @@ class TeamController extends Controller
 {
     public function create(CreateTeamRequest $request)
     {
-        $data = $request->all();
-
-        $verifyName = Team::where('name', $data['name'])->first();
-        if ($verifyName) return ReturnApi::Error('Esse nome de time já existe!', 400);
-
-        return response()->json(['error' => false, 'message' => 'Time criado com sucesso!', 'data' => Team::create($request->validated())], 200);
+        return ReturnApi::Success('Time criado com sucesso!', Team::create($request->validated()), 200);
     }
 
-    public function edit(EditTeamRequest $request, $id)
+    public function edit(EditTeamRequest $request)
     {
-        $data = $request->all();
-
-        $team = Team::find($id);
-        if (!isset($team)) return ReturnApi::Error("Time não encontrado.", 404);
-
-        $verifyName = Team::where('name', $data['name'])->first();
-        if ($verifyName) return ReturnApi::Error('Esse nome de time já existe!', 400);
-
-        return response()->json(['error' => false, 'message' => 'Time atualizado com sucesso!', 'data' => Team::find($id)->update($request->validated())], 200);
+        return ReturnApi::Success('Time atualizado com sucesso!', Team::find($request->validated()['id'])->update());
     }
 
     public function list()
@@ -43,11 +31,8 @@ class TeamController extends Controller
         return response()->json(['error' => false, 'message' => 'Tabela dos times:', 'data' => Team::orderBy('points', 'desc')->get()], 200);
     }
 
-    public function destroy($id)
+    public function destroy(DeleteTeamRequest $request)
     {
-        $team = Team::find($id);
-        if (!isset($team)) return ReturnApi::Error("Time não encontrado.", 404);
-
-        return response()->json(['error' => false, 'message' => 'Time deletado com sucesso!', 'data' => Team::find($id)->delete()], 200);
+        return ReturnApi::Success('Time deletado com sucesso!', Team::find($request->validated()['id'])->delete());
     }
 }

@@ -3,18 +3,15 @@
 namespace App\Http\Requests\Team;
 
 use App\Exceptions\ApiException;
-use App\Rules\Team\UpdateTeamRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EditTeamRequest extends FormRequest
+class DeleteTeamRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,20 +19,15 @@ class EditTeamRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'id' => [
                 'required',
                 'integer',
                 'exists:teams,id'
-            ],
-            'name' => [
-                'string',
-                'required',
-                'unique:teams,name'
             ]
         ];
     }
@@ -44,7 +36,6 @@ class EditTeamRequest extends FormRequest
     {
         return [
             'id' => 'ID do time',
-            'name' => 'Nome do time'
         ];
     }
 
@@ -53,10 +44,7 @@ class EditTeamRequest extends FormRequest
         return [
             'id.required' => 'ID é um campo obrigatorio.',
             'id.integer' => 'ID deve ser um campo do tipo inteiro.',
-            'id.exists' => 'Time não encontrado.',
-            'name.required' => 'Nome é um campo obrigatorio.',
-            'name.string' => 'Nome deve ser um campo do tipo string.',
-            'name.unique' => 'O nome do time não pode se repetir.'
+            'id.exists' => 'Time não encontrado.'
         ];
     }
 

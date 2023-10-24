@@ -28,7 +28,8 @@ class CreateTeamRequest extends FormRequest
         return [
             'name' => [
                 'string',
-                'required'
+                'required',
+                'unique:teams,name'
             ]
         ];
     }
@@ -36,7 +37,7 @@ class CreateTeamRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'Name'
+            'name' => 'Nome do time'
         ];
     }
 
@@ -44,7 +45,8 @@ class CreateTeamRequest extends FormRequest
     {
         return [
             'name.required' => 'Nome é um campo obrigatorio',
-            'name.string' => 'Nome deve ser um campo do tipo string'
+            'name.string' => 'Nome deve ser um campo do tipo string',
+            'name.unique' => 'O nome do time não pode se repetir.'
         ];
     }
 
