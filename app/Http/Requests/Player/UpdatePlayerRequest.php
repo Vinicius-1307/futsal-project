@@ -27,17 +27,34 @@ class UpdatePlayerRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|required',
-            'shirt_number' => ['integer', new ShirtRule(request()->input('team_id'))],
-            'team_id' => 'integer'
+            'id' => [
+                'required',
+                'integer',
+                'exists:players,id'
+            ],
+            'name' => [
+                'string',
+                'required'
+            ],
+            'shirt_number' => [
+                'integer',
+                new ShirtRule(request()->input('team_id'))
+            ],
+            'team_id' => [
+                'required',
+                'integer',
+                'exists:teams,id'
+            ]
 
         ];
     }
     public function attributes(): array
     {
         return [
+            'id' => 'ID do jogador',
             'name' => 'Nome',
             'shirt_number' => 'Número da camisa',
+            'team_id' => 'ID do time'
         ];
     }
 
@@ -48,7 +65,20 @@ class UpdatePlayerRequest extends FormRequest
             'name.required' => 'O campo nome é obrigatório.',
             'shirt_number.integer' => 'O número da camisa deve ser um inteiro.',
             'team_id.integer' => 'O ID do time deve ser um inteiro.',
+            'id.required' => 'ID é um campo obrigatorio.',
+            'id.integer' => 'ID deve ser um campo do tipo inteiro.',
+            'id.exists' => 'Jogador não encontrado.',
+            'team_id.required' => 'ID é um campo obrigatorio.',
+            'team_id.integer' => 'ID deve ser um campo do tipo inteiro.',
+            'team_id.exists' => 'Time não encontrado.'
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'id' => $this->route('id'),
+        ]);
     }
 
     public function failedValidation(Validator $validator): void
