@@ -18,7 +18,7 @@ class TeamController extends Controller
 
     public function edit(EditTeamRequest $request)
     {
-        return ReturnApi::Success('Time atualizado com sucesso!', Team::find($request->validated()['id'])->update());
+        return ReturnApi::Success('Time atualizado com sucesso!', Team::find($request->validated()['id'])->update($request->validated()));
     }
 
     public function list()

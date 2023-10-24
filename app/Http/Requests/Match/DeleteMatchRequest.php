@@ -6,14 +6,12 @@ use App\Exceptions\ApiException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMatchRequest extends FormRequest
+class DeleteMatchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,34 +19,23 @@ class UpdateMatchRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'id' => [
                 'required',
                 'integer',
-                'exists:matches,id'
-            ],
-            'goalsTeamA' => [
-                'required',
-                'integer',
-                'min:0'
-            ],
-            'goalsTeamB' => [
-                'required',
-                'integer',
-                'min:0'
-            ],
+                'exists:teams,id'
+            ]
         ];
     }
+
     public function attributes(): array
     {
         return [
             'id' => 'ID da partida',
-            'goalsTeamA' => 'Gols time A',
-            'goalsTeamB' => 'Gols time A',
         ];
     }
 
@@ -57,13 +44,7 @@ class UpdateMatchRequest extends FormRequest
         return [
             'id.required' => 'ID é um campo obrigatorio.',
             'id.integer' => 'ID deve ser um campo do tipo inteiro.',
-            'id.exists' => 'Partida não encontrada.',
-            'goalsTeamA.required' => 'O campo goalsTeamA é obrigatório.',
-            'goalsTeamA.integer' => 'O campo goalsTeamA é um inteiro.',
-            'goalsTeamA.min' => 'O campo goalsTeamA deve ter no minimo 0.',
-            'goalsTeamB.required' => 'O campo goalsTeamB é obrigatório.',
-            'goalsTeamB.integer' => 'O campo goalsTeamB é um inteiro.',
-            'goalsTeamB.min' => 'O campo goalsTeamB deve ter no minimo 0.',
+            'id.exists' => 'Partida não encontrada.'
         ];
     }
 

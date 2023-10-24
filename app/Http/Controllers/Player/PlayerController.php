@@ -18,7 +18,7 @@ class PlayerController extends Controller
 
     public function update(UpdatePlayerRequest $request)
     {
-        return ReturnApi::Success('Jogador atualizado com sucesso!', Player::find($request->validated()['id'])->update());
+        return ReturnApi::Success('Jogador atualizado com sucesso!', Player::find($request->validated()['id'])->update($request->validated()));
     }
 
     public function destroy(DeletePlayerRequest $request)

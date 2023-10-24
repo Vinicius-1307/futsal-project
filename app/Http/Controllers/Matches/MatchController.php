@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Matches;
 use App\Builder\ReturnApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Match\CreateMatchRequest;
+use App\Http\Requests\Match\DeleteMatchRequest;
 use App\Http\Requests\Match\UpdateMatchRequest;
 use App\Models\Matches;
 
@@ -12,22 +13,16 @@ class MatchController extends Controller
 {
     public function create(CreateMatchRequest $request)
     {
-        return response()->json(['error' => false, 'message' => 'Partida criada com sucesso!', 'data' => Matches::create($request->validated())], 200);
+        return ReturnApi::Success('Time criado com sucesso!', Matches::create($request->validated()), 200);
     }
 
-    public function update(UpdateMatchRequest $request, $id)
+    public function update(UpdateMatchRequest $request)
     {
-        $match = Matches::find($id);
-        if (!isset($match)) return ReturnApi::Error("Partida não encontrada.", 404);
-
-        return response()->json(['error' => false, 'message' => 'Partida atualizada com sucesso!', 'data' => Matches::find($id)->update($request->validated())], 200);
+        return ReturnApi::Success('Jogador atualizado com sucesso!', Matches::find($request->validated()['id'])->update($request->validated()));
     }
 
-    public function destroy($id)
+    public function destroy(DeleteMatchRequest $request)
     {
-        $match = Matches::find($id);
-        if (!isset($match)) return ReturnApi::Error("Partida não encontrada.", 404);
-
-        return response()->json(['error' => false, 'message' => 'Partida deletada com sucesso!', 'data' => Matches::find($id)->delete()], 200);
+        return ReturnApi::Success('Jogador atualizado com sucesso!', Matches::find($request->validated()['id'])->delete());
     }
 }
